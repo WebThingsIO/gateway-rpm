@@ -21,6 +21,8 @@ Patch1: add-launcher.patch
 Web of Things gateway, created by Mozilla, which can bridge existing
 Internet of Things (IoT) devices to the web.
 
+%define debug_package %{nil}
+
 %prep
 %autosetup -n webthings-gateway -p1
 
@@ -51,17 +53,17 @@ mkdir -p %{buildroot}/opt/webthings-gateway/config
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_unitdir}
 cp -r build %{buildroot}/opt/webthings-gateway
-cp -r config/default.js %{buildroot}/opt/webthings-gateway/config
+cp config/default.js %{buildroot}/opt/webthings-gateway/config
 cp -r intent-parser %{buildroot}/opt/webthings-gateway
 cp -r node_modules %{buildroot}/opt/webthings-gateway
-cp -r package-lock.json %{buildroot}/opt/webthings-gateway
-cp -r package.json %{buildroot}/opt/webthings-gateway
+cp package-lock.json %{buildroot}/opt/webthings-gateway
+cp package.json %{buildroot}/opt/webthings-gateway
 cp -r python %{buildroot}/opt/webthings-gateway
 cp -r src %{buildroot}/opt/webthings-gateway
 cp -r static %{buildroot}/opt/webthings-gateway
-cp -r webthings-gateway %{buildroot}%{_bindir}
-cp -r %{SOURCE1} %{buildroot}%{_unitdir}
-cp -r %{SOURCE2} %{buildroot}%{_unitdir}
+cp webthings-gateway %{buildroot}%{_bindir}
+cp %{SOURCE1} %{buildroot}%{_unitdir}
+cp %{SOURCE2} %{buildroot}%{_unitdir}
 
 %pre
 getent group webthings >/dev/null || groupadd -f -r webthings
@@ -90,7 +92,8 @@ fi
 
 %files
 %license LICENSE
-%dir /opt/webthings-gateway
+%dir /opt/webthings-gateway/
+/opt/webthings-gateway/*
 %{_bindir}/webthings-gateway
 %{_unitdir}/webthings-gateway.service
 %{_unitdir}/webthings-gateway-intent-parser.service
