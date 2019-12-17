@@ -28,6 +28,14 @@ git lfs pull
 cp *.spec ~/rpmbuild/SPECS/
 cp src/* ~/rpmbuild/SOURCES/
 
+# Pin the node major version, since dependencies will be built against it
+_node_version=$(yum info nodejs | grep -m1 ^Version | awk '/Version/ {print $3}' | cut -d. -f1)
+sed -i "s/{{nodejs}}/nodejs >= 1:${_node_version}.0.0 nodejs < 1:$(expr ${_node_version} + 1).0.0/" ~/rpmbuild/SPECS/webthings-gateway.spec
+
+# Pin the python3 major version, since dependencies will be built against it
+_python3_version=$(yum info python3 | grep -m1 ^Version | awk '/Version/ {print $3}' | cut -d. -f 1-2)
+sed -i "s/{{python3}}/python3 >= ${_python3_version}.0 python3 < 3.$(expr $(echo ${_python3_version} | cut -d. -f2) + 1).0/" ~/rpmbuild/SPECS/webthings-gateway.spec
+
 # Build it
 rpmbuild -bb ~/rpmbuild/SPECS/webthings-gateway.spec
 

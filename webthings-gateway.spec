@@ -7,7 +7,7 @@ License: MPL-2.0
 URL: https://iot.mozilla.org/gateway/
 
 BuildRequires: nodejs npm git python python3 python3-pip python3-setuptools nanomsg-devel libffi-devel python3-devel gcc gcc-c++ systemd make
-Requires: nodejs python3 python3-pip nanomsg libffi pagekite
+Requires: {{nodejs}} {{python3}} python3-pip nanomsg libffi pagekite
 Requires(pre): shadow-utils
 
 Source0: %{name}_0.10.0.orig.tar.gz
