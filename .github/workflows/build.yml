@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          [
+            "fedora:30",
+          ]
+        include:
+          - image: "fedora:30"
+            name: "fedora-30"
+            arch: "amd64"
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+      - name: Build the Package
+        run: |
+          docker create --name build -it ${{ matrix.image }} sh -c "useradd builder && echo 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/builder && chown -R builder:builder /build && su -c /build/build.sh builder"
+          docker cp . build:/build
+          docker start -a build
+          docker cp -L build:/build/webthings-gateway.rpm ./webthings-gateway.rpm
+          docker rm build
+      - name: Save the package
+        uses: actions/upload-artifact@v1
+        with:
+          name: webthings-gateway-${{ matrix.name}}-${{ matrix.arch }}.rpm
+          path: webthings-gateway.rpm

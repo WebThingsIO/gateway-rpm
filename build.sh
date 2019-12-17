@@ -2,17 +2,17 @@
 
 set -e -x
 
-_scriptdir="$(readlink -f $(dirname "$0"))"
+cd "$(readlink -f $(dirname "$0"))"
 
 # Install build dependencies
 _build_deps=$(grep ^BuildRequires webthings-gateway.spec | cut -d: -f2-)
 _extra_deps="rpm-build rpm-devel rpmlint patch rpmdevtools patch git-lfs"
 
 if [[ $EUID -eq 0 ]]; then
-    dnf install -y ${_extra_deps} ${_build_deps}
+    yum install -y ${_extra_deps} ${_build_deps}
 else
     sudo -p 'Enter sudo password to install build dependencies: ' \
-        su -c "dnf install -y ${_extra_deps} ${_build_deps}"
+        su -c "yum install -y ${_extra_deps} ${_build_deps}"
 fi
 
 rpmdev-setuptree
