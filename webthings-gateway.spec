@@ -33,6 +33,9 @@ npm --cache "${NPM_CACHE}" install
 ./node_modules/.bin/webpack
 npm --cache "${NPM_CACHE}" prune --production
 rm -rf "${NPM_CACHE}"
+# clean up node modules to prevent broken and unnecessary dependencies
+rm -rf ./node_modules/performance-now/test/
+rm -rf ./node_modules/nanomsg/test/
 chmod a+x %{name}
 mkdir python
 python3 -m pip install \
