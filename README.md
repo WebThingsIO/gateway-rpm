@@ -5,7 +5,8 @@
 RPM package for Mozilla's WebThings Gateway.
 
 Current build targets:
-* 
+* Fedora 30
+* Fedora 31
 
 ## Building
 
