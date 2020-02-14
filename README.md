@@ -8,6 +8,17 @@ Current build targets:
 * Fedora 30
 * Fedora 31
 
+## Installation
+
+1. Download the appropriate package from the gateway's [releases page](https://github.com/mozilla-iot/gateway/releases).
+2. Install the package:
+
+    ```sh
+    sudo dnf install ./webthings-gateway-fedora-31-amd64.rpm
+    ```
+
+3. Set up your gateway by visiting http://localhost:8080 in a browser.
+
 ## Building
 
 ```sh
