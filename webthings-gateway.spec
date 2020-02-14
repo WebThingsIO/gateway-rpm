@@ -1,5 +1,5 @@
 Name: webthings-gateway
-Version: 0.10.0
+Version: 0.11.0
 Release: 1%{?dist}
 Summary: WebThings Gateway by Mozilla
 
@@ -10,7 +10,7 @@ BuildRequires: nodejs npm git python python3 python3-pip python3-setuptools nano
 Requires: {{nodejs}} {{python3}} python3-pip nanomsg libffi pagekite
 Requires(pre): shadow-utils
 
-Source0: %{name}_0.10.0.orig.tar.gz
+Source0: %{name}_0.11.0.orig.tar.gz
 Source1: %{name}.service
 Source2: %{name}-intent-parser.service
 
