@@ -6,7 +6,7 @@ Summary: WebThings Gateway by Mozilla
 License: MPL-2.0
 URL: https://iot.mozilla.org/gateway/
 
-BuildRequires: nodejs npm git python python3 python3-pip python3-setuptools nanomsg-devel libffi-devel python3-devel gcc gcc-c++ systemd make
+BuildRequires: autoconf automake nodejs npm git python python3 python3-pip python3-setuptools nanomsg-devel libffi-devel python3-devel gcc gcc-c++ systemd make zlib-devel libpng-devel
 Requires: {{nodejs}} {{python3}} python3-pip nanomsg libffi pagekite
 Requires(pre): shadow-utils
 
@@ -28,8 +28,7 @@ Internet of Things (IoT) devices to the web.
 
 %build
 NPM_CACHE=$(mktemp -dq)
-rm -rf ./node_modules package-lock.json
-npm --cache "${NPM_CACHE}" install
+CPPFLAGS="-DPNG_ARM_NEON_OPT=0" npm --cache "${NPM_CACHE}" ci
 ./node_modules/.bin/webpack
 npm --cache "${NPM_CACHE}" prune --production
 rm -rf "${NPM_CACHE}"
