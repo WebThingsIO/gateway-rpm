@@ -8,7 +8,7 @@
 +  cli: false,
  
 -  profileDir: `${home}/.mozilla-iot`,
-+  profileDir: `/etc/webthings-gateway`,
++  profileDir: '/etc/webthings-gateway',
  
    ports: {
      https: 4443,

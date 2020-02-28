@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e -x
+set -x
 
 cd "$(readlink -f $(dirname "$0"))"
 
@@ -10,9 +10,13 @@ _extra_deps="rpm-build rpm-devel rpmlint patch rpmdevtools patch git-lfs"
 
 if [[ $EUID -eq 0 ]]; then
     yum install -y ${_extra_deps} ${_build_deps}
+    # this should be `npm config -g set unsafe-perm true`, but that sometimes
+    # causes crashes with ancient npm versions
+    echo 'unsafe-perm = true' >> /etc/npmrc
+    npm install -g npm@latest
 else
     sudo -p 'Enter sudo password to install build dependencies: ' \
-        su -c "yum install -y ${_extra_deps} ${_build_deps}"
+        su -c "yum install -y ${_extra_deps} ${_build_deps} && echo 'unsafe-perm = true' >> /etc/npmrc && npm install -g npm@latest"
 fi
 
 rpmdev-setuptree

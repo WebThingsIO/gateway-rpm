@@ -13,21 +13,35 @@ jobs:
         image:
           [
             "fedora:30",
+            "arm64v8/fedora:30",
             "fedora:31",
+            "arm64v8/fedora:31",
           ]
         include:
           - image: "fedora:30"
             name: "fedora-30"
-            arch: "amd64"
+            arch: "x86_64"
+          - image: "arm64v8/fedora:30"
+            name: "fedora-30"
+            arch: "aarch64"
           - image: "fedora:31"
             name: "fedora-31"
-            arch: "amd64"
+            arch: "x86_64"
+          - image: "arm64v8/fedora:31"
+            name: "fedora-31"
+            arch: "aarch64"
     steps:
+      - name: Install qemu
+        run: |
+          sudo apt update
+          sudo apt install -y qemu qemu-user-static binfmt-support --no-install-recommends
+      - name: Setup qemu-user-static
+        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: Checkout the repository
         uses: actions/checkout@v1
       - name: Build the Package
         run: |
-          docker create --name build -it ${{ matrix.image }} sh -c "yum install -y sudo && useradd builder && echo 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/builder && chown -R builder:builder /build && su -c /build/build.sh builder"
+          docker create --name build -it ${{ matrix.image }} /build/build.sh
           docker cp . build:/build
           docker start -a build
           docker rm build
