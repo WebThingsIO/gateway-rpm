@@ -5,8 +5,8 @@
 RPM package for Mozilla's WebThings Gateway, available here: https://github.com/mozilla-iot/gateway/releases
 
 Current build targets:
-* Fedora 30 (x86\_64, aarch64)
 * Fedora 31 (x86\_64, aarch64)
+* Fedora 32 (x86\_64, aarch64)
 
 ## Installation
 

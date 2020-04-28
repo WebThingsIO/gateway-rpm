@@ -7,7 +7,7 @@ License: MPL-2.0
 URL: https://iot.mozilla.org/gateway/
 
 BuildRequires: autoconf automake nodejs npm git python python3 python3-pip python3-setuptools libffi-devel python3-devel gcc gcc-c++ systemd make zlib-devel libpng-devel
-Requires: {{nodejs}} {{python3}} python3-pip libffi pagekite
+Requires: {{nodejs}} {{python3}} python3-pip libffi python2-six
 Requires(pre): shadow-utils
 
 Source0: %{name}_0.12.0.orig.tar.gz
