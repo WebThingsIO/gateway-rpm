@@ -37,7 +37,7 @@ rm -rf ./node_modules/performance-now/test/
 chmod a+x %{name}
 mkdir python
 python3 -m pip install \
-  --install-option="--prefix=" \
+  --prefix= \
   --no-binary=:all: \
   -t ./python \
   ./gateway-addon-python
