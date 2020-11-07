@@ -1,16 +1,15 @@
-# WebThings Gateway by Mozilla
+# WebThings Gateway
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mozilla-iot/gateway-rpm/Build)
-
-RPM package for Mozilla's WebThings Gateway, available here: https://github.com/mozilla-iot/gateway/releases
+RPM package for WebThings Gateway, available here: https://github.com/WebThingsIO/gateway/releases
 
 Current build targets:
 * Fedora 31 (x86\_64, aarch64)
 * Fedora 32 (x86\_64, aarch64)
+* Fedora 33 (x86\_64, aarch64)
 
 ## Installation
 
-1. Download the appropriate package from the gateway's [releases page](https://github.com/mozilla-iot/gateway/releases).
+1. Download the appropriate package from the gateway's [releases page](https://github.com/WebThingsIO/gateway/releases).
 2. Install the package:
 
     ```sh

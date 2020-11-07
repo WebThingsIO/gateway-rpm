@@ -11,15 +11,13 @@ if [ -z "${_gateway_version}" ] || [ -z "${_gateway_addon_python_version}" ]; th
     exit 1
 fi
 
-_gateway_url="https://github.com/mozilla-iot/gateway/archive/${_gateway_version}.tar.gz"
-_gateway_addon_python_url="https://github.com/mozilla-iot/gateway-addon-python"
+_gateway_url="https://github.com/WebThingsIO/gateway/archive/${_gateway_version}.tar.gz"
+_gateway_addon_python_url="https://github.com/WebThingsIO/gateway-addon-python"
 
 # Download the gateway tarball
 curl -L -o "gateway.tar.gz" "${_gateway_url}"
 
 # Clean up
-git lfs untrack src/*.orig.tar.gz || true
-git rm -f src/*.orig.tar.gz || true
 rm -rf webthings-gateway
 
 # Unpack the gateway
@@ -36,8 +34,4 @@ cd -
 # Package everything up
 tar czf "webthings-gateway_${_gateway_version}.orig.tar.gz" webthings-gateway
 rm -rf webthings-gateway
-
-# Add the new tarball to git
 mv *.orig.tar.gz src
-git lfs track src/*.orig.tar.gz
-git add src/*.orig.tar.gz

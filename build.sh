@@ -6,7 +6,7 @@ cd "$(readlink -f $(dirname "$0"))"
 
 # Install build dependencies
 _build_deps=$(grep ^BuildRequires webthings-gateway.spec | cut -d: -f2-)
-_extra_deps="rpm-build rpm-devel rpmlint patch rpmdevtools patch git-lfs"
+_extra_deps="rpm-build rpm-devel rpmlint patch rpmdevtools patch"
 
 if [[ $EUID -eq 0 ]]; then
     yum install -y ${_extra_deps} ${_build_deps}
@@ -23,10 +23,6 @@ rpmdev-setuptree
 
 # Clean up
 git clean -Xdf
-
-# Pull all sources
-git lfs install
-git lfs pull
 
 # Copy in the build scripts
 cp *.spec ~/rpmbuild/SPECS/

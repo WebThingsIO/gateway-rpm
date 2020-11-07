@@ -1,10 +1,10 @@
 Name: webthings-gateway
 Version: 0.12.0
 Release: 1%{?dist}
-Summary: WebThings Gateway by Mozilla
+Summary: WebThings Gateway
 
 License: MPL-2.0
-URL: https://iot.mozilla.org/gateway/
+URL: https://webthings.io/gateway/
 
 BuildRequires: autoconf automake nodejs npm git python python3 python3-pip python3-setuptools libffi-devel python3-devel gcc gcc-c++ systemd make zlib-devel libpng-devel
 Requires: {{nodejs}} {{python3}} python3-pip libffi python2-six
@@ -18,8 +18,8 @@ Patch1: add-launcher.patch
 Patch2: add-env.patch
 
 %description
-Web of Things gateway, created by Mozilla, which can bridge existing
-Internet of Things (IoT) devices to the web.
+Web of Things gateway, which can bridge existing Internet of Things (IoT)
+devices to the web.
 
 %define debug_package %{nil}
 
@@ -64,7 +64,7 @@ cp %{name}.sh %{buildroot}/etc/profile.d
 %pre
 getent group webthings >/dev/null || groupadd -f -r webthings
 if ! getent passwd webthings > /dev/null ; then
-  useradd -r -l -g webthings -d /var/run/%{name} -s /sbin/nologin -c "Mozilla WebThings Gateway" webthings
+  useradd -r -l -g webthings -d /var/run/%{name} -s /sbin/nologin -c "WebThings Gateway" webthings
 fi
 
 %files
@@ -76,7 +76,7 @@ fi
 /etc/profile.d/%{name}.sh
 
 %changelog
-* Tue Feb 18 2020 Michael Stegeman <mstegeman@mozilla.com>
+* Tue Feb 18 2020 WebThingsIO <team@webthings.io>
 - Update to 0.12.
-* Mon Dec 16 2019 Michael Stegeman <mstegeman@mozilla.com>
+* Mon Dec 16 2019 WebThingsIO <team@webthings.io>
 - First webthings-gateway package.
